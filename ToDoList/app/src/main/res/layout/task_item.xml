@@ -4,18 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:onClick="onListItemClick">
 
     <TextView
         android:id="@+id/task_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/priorityButton"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Task" />
+        tools:text="Task"
+        android:layout_marginLeft="28dp" />
 
     <Button
         android:id="@+id/task_complete"
@@ -23,13 +25,24 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="28dp"
+        android:onClick="onClickTaskComplete"
+        android:text="Done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/task_name"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="onClickTaskComplete"
-        android:text="Done"
 
         />
+
+    <ImageButton
+        android:id="@+id/priorityButton"
+        android:layout_width="36dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginLeft="16dp" />
 
 </android.support.constraint.ConstraintLayout>

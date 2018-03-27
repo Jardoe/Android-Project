@@ -6,14 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.user.todolist.db.Task;
+import com.example.user.todolist.Model.Task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by user on 26/03/2018.
@@ -36,6 +35,13 @@ public class TaskArrayAdapter extends ArrayAdapter<Task> {
 
         TextView task = listItemView.findViewById(R.id.task_name);
         task.setText(currentTask.getTaskName());
+
+        ImageButton priorityButton = listItemView.findViewById(R.id.priorityButton);
+        priorityButton.setTag(currentTask);
+        if (currentTask.getPriority() == 1){
+            priorityButton.setVisibility(View.INVISIBLE);
+        }
+
 
         Button doneButton =listItemView.findViewById(R.id.task_complete);
         doneButton.setTag(currentTask);

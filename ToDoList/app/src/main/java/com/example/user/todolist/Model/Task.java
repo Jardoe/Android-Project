@@ -1,6 +1,4 @@
-package com.example.user.todolist.db;
-
-import android.provider.BaseColumns;
+package com.example.user.todolist.Model;
 
 import java.io.Serializable;
 
@@ -11,12 +9,13 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private Integer id;
     private String taskName;
+    private int priority;
 
     public Task(){}
 
-    public Task(String taskName){
-        super();
+    public Task(String taskName, int priority){
         this.taskName = taskName;
+        this.priority = priority;
     }
 
     public String getTaskName() {
@@ -38,5 +37,13 @@ public class Task implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.user.todolist.Model.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +17,8 @@ public class TaskDB extends dbHelper {
     static final String TABLE_NAME = "ToDoList";
     static final String KEY_ID = "id";
     static final String TASK_NAME = "task";
-    private static final String[] COLUMNS = {KEY_ID,TASK_NAME};
+    static final String PRIORITY = " priority";
+    private static final String[] COLUMNS = {KEY_ID,TASK_NAME, PRIORITY};
 
     public TaskDB(Context context) {
         super(context);
@@ -26,6 +29,7 @@ public class TaskDB extends dbHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TASK_NAME, task.getTaskName());
+        values.put(PRIORITY, String.valueOf(task.getPriority()));
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -66,16 +70,16 @@ public class TaskDB extends dbHelper {
         return tasks;
     }
 
-    public int updateTask(Task task){
+    public int updateTask( Task task){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("task", task.getTaskName());
+        values.put("priority", task.getPriority());
 
         int i = db.update(TABLE_NAME, values, KEY_ID+" = ?", new String[]{String.valueOf(task.getId())});
         db.close();
         return i;
     }
-
 
     public Boolean deleteTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();

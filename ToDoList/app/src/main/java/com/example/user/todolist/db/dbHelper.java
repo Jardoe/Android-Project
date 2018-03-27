@@ -11,7 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class dbHelper extends SQLiteOpenHelper{
 
     public static final String DB_NAME = "ToDoList.db";
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 5;
+//    DB version 4 = adding priority.
 
 
     public dbHelper(Context context) {
@@ -21,16 +22,31 @@ public class dbHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "create table " + TaskDB.TABLE_NAME + " ( " +
-                                                TaskDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                TaskDB.TASK_NAME + " TEXT NOT NULL);";
 
-        db.execSQL(createTable);
+        String createPrioritiesTable = "create table " + priorityDB.TABLE_NAME + " ( " +
+                priorityDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                priorityDB.PRIORITY + " STRING );";
+
+        db.execSQL(createPrioritiesTable);
+
+        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('none')");
+        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('low')");
+        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('medium')");
+        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('high')");
+
+        String createTaskTable = "create table "
+                + TaskDB.TABLE_NAME + " ("
+                + TaskDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TaskDB.TASK_NAME + " TEXT NOT NULL, "
+                + TaskDB.PRIORITY + " INTEGER, "
+                + " FOREIGN KEY ("+TaskDB.PRIORITY+") REFERENCES "+priorityDB.TABLE_NAME+"("+priorityDB.KEY_ID+")); ";
+        db.execSQL(createTaskTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TaskDB.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + priorityDB.TABLE_NAME);
         onCreate(db);
     }
 
