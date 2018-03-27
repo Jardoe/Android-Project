@@ -23,30 +23,30 @@ public class dbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createPrioritiesTable = "create table " + priorityDB.TABLE_NAME + " ( " +
-                priorityDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                priorityDB.PRIORITY + " STRING );";
+        String createPrioritiesTable = "create table " + PriorityDB.TABLE_NAME + " ( " +
+                PriorityDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                PriorityDB.PRIORITY + " STRING );";
 
         db.execSQL(createPrioritiesTable);
 
-        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('none')");
-        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('low')");
-        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('medium')");
-        db.execSQL("INSERT INTO " + priorityDB.TABLE_NAME + " ( " + priorityDB.PRIORITY + " ) " + " VALUES ('high')");
+        db.execSQL("INSERT INTO " + PriorityDB.TABLE_NAME + " ( " + PriorityDB.PRIORITY + " ) " + " VALUES ('none')");
+        db.execSQL("INSERT INTO " + PriorityDB.TABLE_NAME + " ( " + PriorityDB.PRIORITY + " ) " + " VALUES ('low')");
+        db.execSQL("INSERT INTO " + PriorityDB.TABLE_NAME + " ( " + PriorityDB.PRIORITY + " ) " + " VALUES ('medium')");
+        db.execSQL("INSERT INTO " + PriorityDB.TABLE_NAME + " ( " + PriorityDB.PRIORITY + " ) " + " VALUES ('high')");
 
         String createTaskTable = "create table "
                 + TaskDB.TABLE_NAME + " ("
                 + TaskDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TaskDB.TASK_NAME + " TEXT NOT NULL, "
                 + TaskDB.PRIORITY + " INTEGER, "
-                + " FOREIGN KEY ("+TaskDB.PRIORITY+") REFERENCES "+priorityDB.TABLE_NAME+"("+priorityDB.KEY_ID+")); ";
+                + " FOREIGN KEY ("+TaskDB.PRIORITY+") REFERENCES "+ PriorityDB.TABLE_NAME+"("+ PriorityDB.KEY_ID+")); ";
         db.execSQL(createTaskTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TaskDB.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + priorityDB.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PriorityDB.TABLE_NAME);
         onCreate(db);
     }
 

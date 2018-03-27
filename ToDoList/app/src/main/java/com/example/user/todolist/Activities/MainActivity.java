@@ -14,11 +14,13 @@ import com.example.user.todolist.Model.Task;
 import com.example.user.todolist.R;
 import com.example.user.todolist.TaskArrayAdapter;
 import com.example.user.todolist.db.TaskDB;
+import com.example.user.todolist.db.PriorityDB;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TaskDB taskDB;
+    PriorityDB priorityDB;
     private ListView taskListView;
     ArrayList<Task> taskList;
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        Task task = new Task (taskEditText.getText().toString(), 0);
+                        Task task = new Task (taskEditText.getText().toString(), 1);
                         if (taskEditText.getText().toString() == null || taskEditText.getText().toString().equals("")){
                             taskEditText.requestFocus();
                         } else {

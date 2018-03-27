@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +14,17 @@ import android.widget.Spinner;
 
 import com.example.user.todolist.Model.Task;
 import com.example.user.todolist.R;
+import com.example.user.todolist.db.PriorityDB;
 import com.example.user.todolist.db.TaskDB;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EditTaskActivity extends AppCompatActivity {
 
     TaskDB taskDB;
+    PriorityDB priorityDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +39,7 @@ public class EditTaskActivity extends AppCompatActivity {
         taskNameEdit.setText(selectedTask.getTaskName());
 
         final Spinner prioritySetter = findViewById(R.id.priority_setter);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.priority_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        prioritySetter.setAdapter(adapter);
-
+        populateSpinner();
 
         ImageButton submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener(){
@@ -43,10 +47,27 @@ public class EditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                int spinnerOption = prioritySetter.getSelectedItem();
+                Object spinnerOption = prioritySetter.getSelectedItem();
+
+                //find the string that they selected in the array
+                //that index + 1 in the priority
+
+
+                int pri = 0;
+
+                if(spinnerOption.equals("none")) {
+                    pri = 1;
+                } else if(spinnerOption.equals("low")) {
+                    pri = 2;
+                } else if(spinnerOption.equals("medium")){
+                    pri = 3;
+                } else {
+                    pri = 4;}
+
+                Log.e("LOG", spinnerOption.toString());
 
                 selectedTask.setTaskName(taskNameEdit.getText().toString());
-//                selectedTask.setPriority(spinnerOption);
+                selectedTask.setPriority(pri);
 
                 taskDB.updateTask(selectedTask);
 
@@ -56,6 +77,15 @@ public class EditTaskActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void populateSpinner(){
+        priorityDB = new PriorityDB(this);
+        String[] array = priorityDB.getAll();
+        List<String> priorityList = Arrays.asList(array);
+        ArrayAdapter<String> adapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, priorityList);
+        Spinner prioritySetter = findViewById(R.id.priority_setter);
+        prioritySetter.setAdapter(adapter);
     }
 
 }
