@@ -1,12 +1,9 @@
 package com.example.user.todolist.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,7 +14,6 @@ import com.example.user.todolist.R;
 import com.example.user.todolist.db.PriorityDB;
 import com.example.user.todolist.db.TaskDB;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,8 +59,6 @@ public class EditTaskActivity extends AppCompatActivity {
                     pri = 3;
                 } else {
                     pri = 4;}
-
-                Log.e("LOG", spinnerOption.toString());
 
                 selectedTask.setTaskName(taskNameEdit.getText().toString());
                 selectedTask.setPriority(pri);
