@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.user.todolist.Model.Task;
+import com.example.user.todolist.Model.Utility;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,9 @@ public class TaskDB extends dbHelper {
     static final String TABLE_NAME = "ToDoList";
     static final String KEY_ID = "id";
     static final String TASK_NAME = "task";
-    static final String PRIORITY = " priority";
-    private static final String[] COLUMNS = {KEY_ID,TASK_NAME, PRIORITY};
+    static final String PRIORITY = "priority";
+    static final String DATE = "date";
+    private static final String[] COLUMNS = {KEY_ID,TASK_NAME, PRIORITY, DATE};
 
     public TaskDB(Context context) {
         super(context);
@@ -30,6 +32,7 @@ public class TaskDB extends dbHelper {
         ContentValues values = new ContentValues();
         values.put(TASK_NAME, task.getTaskName());
         values.put(PRIORITY, String.valueOf(task.getPriority()));
+        values.put(DATE, String.valueOf(task.getDate()));
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -64,6 +67,8 @@ public class TaskDB extends dbHelper {
             task = new Task();
             task.setId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)));
             task.setTaskName(cursor.getString(cursor.getColumnIndexOrThrow(TASK_NAME)));
+            task.setPriority(cursor.getInt(cursor.getColumnIndexOrThrow(PRIORITY)));
+            task.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
 
             tasks.add(task);
         }
@@ -75,6 +80,7 @@ public class TaskDB extends dbHelper {
         ContentValues values = new ContentValues();
         values.put("task", task.getTaskName());
         values.put("priority", task.getPriority());
+        values.put("date", String.valueOf(task.getDate()));
 
         int i = db.update(TABLE_NAME, values, KEY_ID+" = ?", new String[]{String.valueOf(task.getId())});
         db.close();

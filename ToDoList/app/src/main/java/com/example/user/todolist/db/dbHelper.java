@@ -11,9 +11,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class dbHelper extends SQLiteOpenHelper{
 
     public static final String DB_NAME = "ToDoList.db";
-    public static final int DB_VERSION = 5;
+    public static final int DB_VERSION = 7;
 //    DB version 4 = adding priority.
-
+//    DB version 7 = adding date
 
     public dbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -38,6 +38,7 @@ public class dbHelper extends SQLiteOpenHelper{
                 + TaskDB.TABLE_NAME + " ("
                 + TaskDB.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TaskDB.TASK_NAME + " TEXT NOT NULL, "
+                + TaskDB.DATE + " DATE NOT NULL, "
                 + TaskDB.PRIORITY + " INTEGER, "
                 + " FOREIGN KEY ("+TaskDB.PRIORITY+") REFERENCES "+ PriorityDB.TABLE_NAME+"("+ PriorityDB.KEY_ID+")); ";
         db.execSQL(createTaskTable);

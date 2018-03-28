@@ -1,6 +1,7 @@
 package com.example.user.todolist.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by user on 24/03/2018.
@@ -9,13 +10,15 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private Integer id;
     private String taskName;
-    private int priority;
+    private Integer priority;
+    private String date;
 
     public Task(){}
 
-    public Task(String taskName, int priority){
+    public Task(String taskName, Integer priority, String date){
         this.taskName = taskName;
         this.priority = priority;
+        this.date = date;
     }
 
     public String getTaskName() {
@@ -39,11 +42,19 @@ public class Task implements Serializable {
         return id;
     }
 
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
     }
 }
