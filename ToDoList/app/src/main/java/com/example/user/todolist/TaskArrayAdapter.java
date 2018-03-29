@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.todolist.Model.Task;
@@ -37,27 +38,25 @@ public class TaskArrayAdapter extends ArrayAdapter<Task> {
         TextView task = listItemView.findViewById(R.id.task_name);
         task.setText(currentTask.getTaskName());
 
-        ImageButton priorityButton = listItemView.findViewById(R.id.priorityButton);
+        ImageView priorityButton = listItemView.findViewById(R.id.priorityButton);
         priorityButton.setTag(currentTask);
         if (currentTask.getPriority() == 1) {
             priorityButton.setVisibility(View.INVISIBLE);
-            Log.d("Image viability", String.valueOf(currentTask.getPriority()));
         } else if (currentTask.getPriority() == 2){
-            priorityButton.setImageResource(R.drawable.ic_launcher_background);
-            Log.d("Image visability", String.valueOf(currentTask.getPriority()));
+            priorityButton.setImageResource(R.color.colorLowPriority);
 
         } else if (currentTask.getPriority() == 3){
-            priorityButton.setImageResource(R.color.colorAccent);
+            priorityButton.setImageResource(R.color.colorMediumPriority);
 
         } else if (currentTask.getPriority() == 4){
-            priorityButton.setImageResource(R.color.colorPrimaryDark);
+            priorityButton.setImageResource(R.color.colorHighPriority);
         }
 
         TextView date = listItemView.findViewById(R.id.dateView);
         date.setText((currentTask.getDate()));
 
 
-        Button doneButton = listItemView.findViewById(R.id.task_complete);
+        ImageButton doneButton = listItemView.findViewById(R.id.task_complete);
         doneButton.setTag(currentTask);
 
         listItemView.setTag(currentTask);

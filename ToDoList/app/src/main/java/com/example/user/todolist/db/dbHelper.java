@@ -10,12 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class dbHelper extends SQLiteOpenHelper{
 
-    public static final String DB_NAME = "ToDoList.db";
-    public static final int DB_VERSION = 7;
+    private static final String DB_NAME = "ToDoList.db";
+    private static final int DB_VERSION = 8;
 //    DB version 4 = adding priority.
 //    DB version 7 = adding date
+//    DB version 8 = change date format BECAUSE FUCK DATES
 
-    public dbHelper(Context context) {
+    dbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         SQLiteDatabase db = this.getWritableDatabase();
     }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/all_tasks"
+            android:icon="@drawable/ic_all"
+            android:title="@string/all_tasks" />
+
+        <item
+            android:id="@+id/today"
+            android:icon="@drawable/ic_today"
+            android:title="@string/today_menu" />
+        <item
+            android:id="@+id/tomorrow"
+            android:icon="@drawable/ic_pizza"
+            android:title="Tomorrow"/>
+
+        <item
+            android:id="@+id/next_7_days"
+            android:icon="@drawable/ic_week"
+            android:title="Next 7 days" />
+
+    </group>
+</menu>

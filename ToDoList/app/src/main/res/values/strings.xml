@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ToDoList</string>
-
+    <string name="today_menu">Today</string>
+    <string name="all_tasks">All Tasks</string>
 </resources>
